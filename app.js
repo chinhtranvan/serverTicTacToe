@@ -8,11 +8,12 @@ app.use(cors());
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:3000/2players/Online',
+    origin: 'https://master.d3ctzvy8y5el11.amplifyapp.com/2players/Online',
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
+
 io.on("connection", (socket) => {
   console.log('socket connected')
   socket.on('next turn',(res)=>{
@@ -21,7 +22,12 @@ io.on("connection", (socket) => {
     socket.broadcast.emit('next turn',res)
   })
 })
-httpServer.listen(3001, () => {
+
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
+
+httpServer.listen(process.env.PORT || 3001, () => {
   console.log('app is running');
 });
 
