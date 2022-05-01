@@ -1,12 +1,28 @@
+const { Server } = require("socket.io");
 const express = require('express')
-const app = express()
+const cors = require("cors");
+const app = express();
+const http = require("http");
 
-
-app.get('/', (req, res) => {
-  res.send('anh sim ranh toi khong, lam cho xong sóc kẹt!')
+app.use(cors());
+const httpServer = http.createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:3000/2players/Online',
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
+io.on("connection", (socket) => {
+  console.log('socket connected')
+  socket.on('next turn',(res)=>{
+    console.log('doi ban vua danh')
+    console.log(res)
+    socket.broadcast.emit('next turn',res)
+  })
 })
+httpServer.listen(3001, () => {
+  console.log('app is running');
+});
 
-const port = process.env.port || 3000;
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+
