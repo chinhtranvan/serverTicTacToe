@@ -24,11 +24,12 @@ io.on("connection", (socket) => {
 })
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello World! App is running");
 });
 
 httpServer.listen(process.env.PORT || 3001, () => {
   console.log('app is running');
 });
+
 
 
