@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
   res.send("Hello World! App is running");
 });
 
-httpServer.listen(process.env.PORT || 3001, () => {
+httpServer.listen(process.env.PORT || 8080, () => {
   console.log('app is running');
 });
 
