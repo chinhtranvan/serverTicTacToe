@@ -8,7 +8,7 @@ app.use(cors());
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://master.d3ctzvy8y5el11.amplifyapp.com/2players/Online',
+    origin: 'https://master.d3ctzvy8y5el11.amplifyapp.com/2players/Online',
     methods: ["GET", "POST"],
     credentials: true,
   },
